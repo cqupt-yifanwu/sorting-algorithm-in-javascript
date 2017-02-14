@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>冒泡排序算法</title>
+</head>
+<body>
+	<h1>冒泡排序算法</h1>
+	<h4>请在下方的输入框中输入你的数字，注意：每两个数字之间请用空格隔开</h4>
+	<label for="number">请输入：</label><input id="number">
+	<button type="submit" id="submit">开始排序</button>
+	<div id="result">
+		<h4>排序的结果是：</h4>
+	</div>
+</body>
+<script type="text/javascript">
+	window.onload = function () {
+		var numbers = [];
+		var button = document.getElementById('submit');
+		var rlt = document.getElementById("result");
+
+		function bubbleSort (arr) {
+			var length = arr.length;
+			for (var i = 0; i < length; i++) {
+				for (var j = 0; j < length - i - 1; j++) {
+					if (arr[j] > arr[j + 1]) {
+						swap(arr, j, j + 1)
+					}
+				}
+			}
+			console.log(arr);
+			return arr;
+		};
+
+		function swap (arr, index1, index2) {
+			var temp = arr[index1];
+			arr[index1] = arr[index2];
+			arr[index2] = temp;
+		};
+
+		button.onclick = function () {
+			var val = document.getElementById('number').value;
+			var arr = val.trim().split(" ");
+			// 将字符转化为数字
+			for (var i = 0; i < arr.length; i++) {
+				arr[i] = parseInt(arr[i]);
+			}
+			var result = bubbleSort(arr);
+			console.log(result);
+			var str = "<p>" + arr + "<p>";
+			rlt.innerHTML = str;
+		}
+	}
+</script>
+</html>
