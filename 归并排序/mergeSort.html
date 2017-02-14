@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>归并排序算法</title>
+</head>
+<body>
+	<h1>归并排序算法</h1>
+	<h4>请在下方的输入框中输入你的数字，注意：每两个数字之间请用空格隔开</h4>
+	<label for="number">请输入：</label><input id="number">
+	<button type="submit" id="submit">开始排序</button>
+	<div id="result">
+		<h4>排序的结果是：</h4>
+	</div>
+</body>
+<script type="text/javascript">
+	window.onload = function () {
+		var numbers = [];
+		var button = document.getElementById('submit');
+		var rlt = document.getElementById("result");
+
+		function mergeSort (arr) {
+			return mergeSortRec(arr);
+		};
+		// 将数组分割为较小的数组直到每个数组只剩下一个值，利用递归的方法实现，同时也将分割的两个数组利用此递归
+		var mergeSortRec = function (arr) {
+			var length = arr.length;
+			// 如果数组中只剩下一个数字则递归结束
+			if (length == 1) {
+				return arr;
+			}
+			var mid = Math.floor(length / 2),
+			left = arr.slice(0, mid),
+			right = arr.slice(mid);
+			
+			// merge函数用来将小的数组逐渐合并成一个大的数组，同时对数组项进行排序
+			return merge(mergeSortRec(left), mergeSortRec(right));
+		}
+		var merge = function (left, right) {
+			console.log(right);
+			var result = [],
+			il = 0,
+			ir = 0;
+			while(il < left.length && ir < right.length) {
+				/* 
+				* 将左右两部分进行比较，将较小的值让如最后的结果中，并将其对应侧的位置后移，
+				* 另外一边不后移，最后将一侧剩余的一方全部放入结果中
+				*/
+				if (left[il] < right[ir]) {
+					result.push(left[il++]);
+				} else {
+					result.push(right[ir++]);
+				}
+				while (il < left.length) {
+					result.push(left[il++]);
+				}
+				while (ir < right.length) {
+					result.push(right[ir++]);
+				}
+				return result;
+			}
+		}
+		button.onclick = function () {
+			var val = document.getElementById('number').value;
+			var arr = val.trim().split(" ");
+			// 将字符转化为数字
+			for (var i = 0; i < arr.length; i++) {
+				arr[i] = parseInt(arr[i]);
+			}
+			var result = mergeSort(arr);
+			console.log(result);
+			var str = "<p>" + arr + "<p>";
+			rlt.innerHTML = str;
+		}
+	}
+</script>
+</html>
