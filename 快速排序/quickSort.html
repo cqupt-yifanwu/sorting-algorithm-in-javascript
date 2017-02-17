@@ -33,7 +33,7 @@
 		            i = left,
 		            j = right;
 		    while (i <= j) {
-		    	    // 先从左边开始，当遇到比中轴大的值停止向前，并且与中轴交换。
+		    	    // 先从左边开始，当遇到比中轴大的值停止向前
 		            while (arr[i] < pivot) { 
 		                i++;
 		            }
@@ -60,7 +60,7 @@
 		            quick(arr, index, right);
 		        }
 		     }
-			return arr;
+			return arr;  // 结束位置
 		}
 		button.onclick = function () {
 			var val = document.getElementById('number').value;
